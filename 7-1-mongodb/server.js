@@ -48,7 +48,7 @@
  * ============================================
  *   - In cmd write the following commands: 
  *      - use labDB          // create or switch DB
- *      - db.createCollection("students") //// create collection
+ *      - db.createCollection("stuents") //// create collection
  * ============================================
  * TODO-6 Insert Documents
  * ============================================
@@ -170,10 +170,24 @@
 import mongoose from "mongoose";
 
 // establish connection
+const connectionString =
+  process.env.MONGODB_URI ??
+  "mongodb+srv://admin:admin@cluster0.qkehbmf.mongodb.net/";
+
+async function connectToMongo() {
+  try {
+    await mongoose.connect(connectionString, { dbName: "test" });
+    console.log("✅ Connected to MongoDB via Mongoose");
+  } catch (error) {
+    console.error("❌ Failed to connect to MongoDB:", error);
+    process.exit(1);
+  }
+}
+
+connectToMongo();
 
 
 // define schema
-
 
 // create document
 
