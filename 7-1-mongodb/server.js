@@ -193,19 +193,36 @@ const studentSchema = new mongoose.Schema({
          age: Number,
          major: String
       });
-      const Student = mongoose.model("Student", studentSchema);
 
 // create document
+const Student = mongoose.model("Student", studentSchema);
 
 
 // read document
 
+async function createStudents() {
+  await Student.deleteMany({});
+  await Student.insertMany([
+    { name: "Ali", age: 21, major: "CS" },
+    { name: "Sara", age: 23, major: "SE" },
+  ]);
+  console.log("Inserted sample students");
+}
 
 // update document
-
+async function readStudents() {
+  const all = await Student.find();
+  console.log("All students:", all);
+}
 
 // delete document
+async function deleteStudent() {
+  await Student.deleteOne({ name: "Sara" });
+  console.log("Deleted Sara");
+}
 
-
-
+await createStudents();
+await readStudents();
+await deleteStudent();
+await readStudents();
 
