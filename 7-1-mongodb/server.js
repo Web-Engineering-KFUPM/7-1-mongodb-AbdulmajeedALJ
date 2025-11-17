@@ -229,4 +229,6 @@ await createStudents();
 await readStudents();
 await deleteStudent();
 await readStudents();
+await updateStudent();
+await readStudents();
 
